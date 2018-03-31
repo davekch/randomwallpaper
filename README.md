@@ -22,7 +22,7 @@ pip install cairocffi
  You can add arbitrary colors in normalized RGB to the script if you wish!
  - `-p PICTURE`: specify an image (png) as background.
 
-Running the script (`python randombackground.py` or `./randombackground.py`) will place `.randombackground.png` in your home-directory. This way you can easily use the script to create a new wallpaper everytime you login.
+Running the script (`python randombackground.py` or `./randombackground.py`) will place `.randombackground.png` in your home-directory. This way you can easily use the script to create a new wallpaper everytime you log in.
 
 For example if you use i3, you could add the line
 
