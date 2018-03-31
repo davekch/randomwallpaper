@@ -6,7 +6,7 @@ Python-script that generates PNGs of random geometric figures to be used as a wa
 ### Download
 
 ```bash
-git clone ...
+git clone https://github.com/davekch/randomwallpaper.git
 ```
 **Requirements:**
  - python 2.7
@@ -18,7 +18,7 @@ pip install cairocffi
 ### Usage
 #### Options
 
- - `-c COLOR`: specify the color of the image. Valid values for `COLOR` are blue, turquoise, red, orange, grey, black. Default is turquoise.
+ - `-c COLOR`: specify the color of the image. Valid values for `COLOR` are blue, turquoise, red, orange, grey and black. Default is turquoise.
  You can add arbitrary colors in normalized RGB to the script if you wish!
  - `-p PICTURE`: specify an image (png) as background.
 
