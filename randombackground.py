@@ -30,6 +30,8 @@ BGC_r, BGC_g, BGC_b = 0.149, 0.752, 0.811  # backgroundcolor in normalized rgb
 FGC_r, FGC_g, FGC_b = 0,0,0                # foregroundcolor
 EDGES               = 6
 
+PATH = "/home/" + commands.getoutput("whoami") + "/.randombackground.png"
+
 
 surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, WIDTH, HEIGHT)
 context = cairo.Context(surface)
@@ -43,6 +45,7 @@ group = parser.add_mutually_exclusive_group()
 group.add_argument("-c", "--color", help="Specify a color. Allowed arguments are: blue, turquoise, red, orange, grey, black, white, random")
 group.add_argument("-t", "--theme", help="Select a theme. Allowed arguments are: submarine, poison, poison_dark, fire, fire_dark, pinky, random")
 parser.add_argument("-p", "--picture", help="Specify a background picture")
+parser.add_argument("-s", "--save", help="Save output png as SAVE")
 args = parser.parse_args()
 
 if args.color:
@@ -85,6 +88,9 @@ if args.picture:
 else:
     context.set_source_rgb(BGC_r, BGC_g, BGC_b)
 
+if args.save:
+    PATH = args.save
+
 context.stroke()
 context.rectangle(0,0, 1.778,1)
 context.fill()
@@ -101,5 +107,8 @@ for i in range(EDGES):
 
 context.stroke()
 
-user = commands.getoutput("whoami")
-surface.write_to_png("/home/"+user+"/.randombackground.png")
+try:
+    surface.write_to_png(PATH)
+except:
+    print "Something went wrong when saving the image."
+    print "U sure the directory to save the .png in exists?"
