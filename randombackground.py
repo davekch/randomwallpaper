@@ -16,6 +16,15 @@ COLORS = {
 "white"    : {"r": 1.000, "g": 1.000, "b": 1.000}
 }
 
+THEMES = {
+"submarine"  : {"BGC": COLORS["turquoise"], "FGC": COLORS["blue"]},
+"poison"     : {"BGC": COLORS["grey"],      "FGC": COLORS["turquoise"]},
+"poison_dark": {"BGC": COLORS["black"],     "FGC": COLORS["turquoise"]},
+"fire"       : {"BGC": COLORS["red"],       "FGC": COLORS["orange"]},
+"fire_dark"  : {"BGC": COLORS["black"],     "FGC": COLORS["red"]},
+"pinky"      : {"BGC": COLORS["red"],       "FGC": COLORS["blue"]}
+}
+
 WIDTH, HEIGHT       = 1920, 1080
 BGC_r, BGC_g, BGC_b = 0.149, 0.752, 0.811  # backgroundcolor in normalized rgb
 FGC_r, FGC_g, FGC_b = 0,0,0                # foregroundcolor
@@ -30,7 +39,9 @@ context.scale(HEIGHT)
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-c", "--color", help="Specify a color. Allowed arguments are: blue, turquoise, red, orange, grey, black, white, random")
+group = parser.add_mutually_exclusive_group()
+group.add_argument("-c", "--color", help="Specify a color. Allowed arguments are: blue, turquoise, red, orange, grey, black, white, random")
+group.add_argument("-t", "--theme", help="Select a theme. Allowed arguments are: submarine, poison, poison_dark, fire, fire_dark, pinky, random")
 parser.add_argument("-p", "--picture", help="Specify a background picture")
 args = parser.parse_args()
 
@@ -45,6 +56,17 @@ if args.color:
     except:
         print "not a legit color!"
         sys.exit()
+if args.theme:
+    if args.theme=="random":
+        args.theme=random.choice([t for t in THEMES])
+    try:
+        t = THEMES[args.theme]
+        BGC_r, BGC_g, BGC_b = t["BGC"]["r"], t["BGC"]["g"], t["BGC"]["b"]
+        FGC_r, FGC_g, FGC_b = t["FGC"]["r"], t["FGC"]["g"], t["FGC"]["b"]
+    except:
+        print "not a legit theme!"
+        sys.exit()
+
 if args.picture:
     try:
         img = cairo.ImageSurface.create_from_png(args.picture)
