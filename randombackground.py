@@ -9,10 +9,11 @@ import argparse
 COLORS = {
 "blue"     : {"r": 0.109, "g": 0.127, "b": 0.627},
 "turquoise": {"r": 0.149, "g": 0.752, "b": 0.811},
-"red"      : {"r": 1.000, "g": 0.000, "b": 0.000},
+"red"      : {"r": 0.847, "g": 0.094, "b": 0.094},
 "orange"   : {"r": 0.937, "g": 0.654, "b": 0.121},
 "grey"     : {"r": 0.368, "g": 0.368, "b": 0.368},
-"black"    : {"r": 0.000, "g": 0.000, "b": 0.000}
+"black"    : {"r": 0.000, "g": 0.000, "b": 0.000},
+"white"    : {"r": 1.000, "g": 1.000, "b": 1.000}
 }
 
 WIDTH, HEIGHT       = 1920, 1080
@@ -29,7 +30,7 @@ context.scale(HEIGHT)
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-c", "--color", help="Specify a color. Allowed arguments are: blue, turquoise, red, orange, grey, black")
+parser.add_argument("-c", "--color", help="Specify a color. Allowed arguments are: blue, turquoise, red, orange, grey, black, white")
 parser.add_argument("-p", "--picture", help="Specify a background picture")
 args = parser.parse_args()
 
