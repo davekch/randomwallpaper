@@ -30,11 +30,13 @@ context.scale(HEIGHT)
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-c", "--color", help="Specify a color. Allowed arguments are: blue, turquoise, red, orange, grey, black, white")
+parser.add_argument("-c", "--color", help="Specify a color. Allowed arguments are: blue, turquoise, red, orange, grey, black, white, random")
 parser.add_argument("-p", "--picture", help="Specify a background picture")
 args = parser.parse_args()
 
 if args.color:
+    if args.color=="random":
+        args.color=random.choice([c for c in COLORS])
     try:
         c = COLORS[args.color]
         BGC_r, BGC_g, BGC_b = c["r"], c["g"], c["b"]
