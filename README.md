@@ -21,6 +21,8 @@ pip install cairocffi
  - `-c COLOR`: specify the color of the image. Valid values for `COLOR` are blue, turquoise, red, orange, grey, black and random. Default is turquoise.
  You can add arbitrary colors in normalized RGB to the script if you wish!
  - `-t THEME`: specify a theme. A theme is a combination of a foreground- and background-color. You can either set a color OR a theme. Valid values for `THEME` are submarine, poison, poison_dark, fire, fire_dark, pinky and random
+ - `--fg R G B`: specify a foreground color in normalized RGB
+ - `--bg R G B`: specify a background color in normalized RGB
  - `-p PICTURE`: specify an image (png) as background.
  - `-s OUTPUT`: save the output .png as OUTPUT
  - `-h`: display a short help message.
