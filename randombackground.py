@@ -44,6 +44,8 @@ parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group()
 group.add_argument("-c", "--color", help="Specify a color. Allowed arguments are: blue, turquoise, red, orange, grey, black, white, random")
 group.add_argument("-t", "--theme", help="Select a theme. Allowed arguments are: submarine, poison, poison_dark, fire, fire_dark, pinky, random")
+parser.add_argument("--fg", nargs=3, help="specify foreground color in normalized rgb")
+parser.add_argument("--bg", nargs=3, help="specify background color in normalized rgb")
 parser.add_argument("-p", "--picture", help="Specify a background picture")
 parser.add_argument("-s", "--save", help="Save output png as SAVE")
 args = parser.parse_args()
@@ -69,6 +71,19 @@ if args.theme:
     except:
         print "not a legit theme!"
         sys.exit()
+
+if args.fg:
+    for c in args.fg:
+        if float(c)>1. or float(c)<0.:
+            print "rgb values must be between 0 and 1!"
+            sys.exit()
+    FGC_r, FGC_g, FGC_b = float(args.fg[0]), float(args.fg[1]), float(args.fg[2])
+if args.bg:
+    for c in args.bg:
+        if float(c)>1. or float(c)<0.:
+            print "rgb values must be between 0 and 1!"
+            sys.exit()
+    BGC_r, BGC_g, BGC_b = float(args.bg[0]), float(args.bg[1]), float(args.bg[2])
 
 if args.picture:
     try:
