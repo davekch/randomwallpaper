@@ -1,8 +1,9 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
 import cairocffi as cairo
+from pathlib import Path
 import random
-import commands, sys
+import sys
 import argparse
 
 
@@ -30,15 +31,12 @@ BGC_r, BGC_g, BGC_b = 0.149, 0.752, 0.811  # backgroundcolor in normalized rgb
 FGC_r, FGC_g, FGC_b = 0,0,0                # foregroundcolor
 EDGES               = 6
 
-PATH = "/home/" + commands.getoutput("whoami") + "/.randombackground.png"
-
+PATH = f"{Path.cwd()}/randombackground.png"
 
 surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, WIDTH, HEIGHT)
 context = cairo.Context(surface)
 
 context.scale(HEIGHT)
-
-
 
 parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group()
@@ -59,7 +57,7 @@ if args.color:
         if args.color=="black" or args.color=="grey":
             FGC_r, FGC_g, FGC_b = 1,1,1
     except:
-        print "not a legit color!"
+        print("not a legit color!")
         sys.exit()
 if args.theme:
     if args.theme=="random":
@@ -69,19 +67,19 @@ if args.theme:
         BGC_r, BGC_g, BGC_b = t["BGC"]["r"], t["BGC"]["g"], t["BGC"]["b"]
         FGC_r, FGC_g, FGC_b = t["FGC"]["r"], t["FGC"]["g"], t["FGC"]["b"]
     except:
-        print "not a legit theme!"
+        print("not a legit theme!")
         sys.exit()
 
 if args.fg:
     for c in args.fg:
         if float(c)>1. or float(c)<0.:
-            print "rgb values must be between 0 and 1!"
+            print("rgb values must be between 0 and 1!")
             sys.exit()
     FGC_r, FGC_g, FGC_b = float(args.fg[0]), float(args.fg[1]), float(args.fg[2])
 if args.bg:
     for c in args.bg:
         if float(c)>1. or float(c)<0.:
-            print "rgb values must be between 0 and 1!"
+            print("rgb values must be between 0 and 1!")
             sys.exit()
     BGC_r, BGC_g, BGC_b = float(args.bg[0]), float(args.bg[1]), float(args.bg[2])
 
@@ -89,10 +87,10 @@ if args.picture:
     try:
         img = cairo.ImageSurface.create_from_png(args.picture)
     except IOError:
-        print "File not found!"
+        print("File not found!")
         sys.exit()
     except MemoryError:
-        print "Must be png!"
+        print("Must be png!")
         sys.exit()
     context.save()
     context.scale(1./HEIGHT)
@@ -125,5 +123,8 @@ context.stroke()
 try:
     surface.write_to_png(PATH)
 except:
-    print "Something went wrong when saving the image."
-    print "U sure the directory to save the .png in exists?"
+    print (
+        "Something went wrong when saving the image.",
+        "U sure the directory to save the .png in exists?",
+        sep="\n"
+    )
